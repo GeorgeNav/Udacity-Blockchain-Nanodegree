@@ -1,0 +1,3 @@
+How to: https://blockgeeks.com/install-bitcoin-core/
+Info: https://en.bitcoin.it/wiki/Data_directory
+Running: https://en.bitcoin.it/wiki/Running_Bitcoin
