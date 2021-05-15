@@ -20,7 +20,7 @@ web3.eth.getAccounts()
     })
 
     const rawTransaction = {
-      nonce: 1, // TODO: this must be incremented after every transaction
+      nonce: 0, // TODO: this must be incremented after every transaction
       to: receiver.address,
       gasPrice: 20000000,
       gasLimit: 30000,
