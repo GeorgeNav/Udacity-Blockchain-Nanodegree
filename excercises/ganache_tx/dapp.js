@@ -10,17 +10,19 @@ web3.eth.getAccounts()
     const receiver = {address: accounts[1]}
 
     await web3.eth.getBalance(sender.address).then((balance) => {
-      console.log(`${sender.address}: ${balance}`)
+      console.log(`${sender.address} (before): ${balance}`)
       sender.balance = balance
     })
+    sender.nonce = await web3.eth.getTransactionCount(sender.address)
 
-    web3.eth.getBalance(receiver.address).then((balance) => {
-      console.log(`${receiver.address}: ${balance}`)
+    await web3.eth.getBalance(receiver.address).then((balance) => {
+      console.log(`${receiver.address} (before): ${balance}`)
       receiver.balance = balance
     })
+    receiver.nonce = await web3.eth.getTransactionCount(receiver.address)
 
     const rawTransaction = {
-      nonce: 0, // TODO: this must be incremented after every transaction
+      nonce: sender.nonce, // TODO: this must be incremented after every transaction
       to: receiver.address,
       gasPrice: 20000000,
       gasLimit: 30000,
@@ -32,6 +34,16 @@ web3.eth.getAccounts()
     const transaction = new Transaction(rawTransaction)
     transaction.sign(sender.privateKey)
     const serializedTransaction = transaction.serialize()
-    web3.eth.sendSignedTransaction(serializedTransaction)
+    await web3.eth.sendSignedTransaction(serializedTransaction)
+
+    await web3.eth.getBalance(sender.address).then((balance) => {
+      console.log(`${sender.address} (after): ${balance}`)
+      sender.balance = balance
+    })
+
+    await web3.eth.getBalance(receiver.address).then((balance) => {
+      console.log(`${receiver.address} (after): ${balance}`)
+      receiver.balance = balance
+    })
   })
   .catch(console.log)
