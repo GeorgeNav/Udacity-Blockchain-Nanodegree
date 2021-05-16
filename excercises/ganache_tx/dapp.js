@@ -39,7 +39,15 @@ web3.eth.getAccounts()
     const serializedTransaction = transaction.serialize()
     await web3.eth.sendSignedTransaction(serializedTransaction)
 
+    oldSenderBalance = sender.balance
     await getEOCAccountInfo(sender, 'sender (after)')
     await getEOCAccountInfo(receiver, 'receiver (after)')
+    console.log('old sender balance', oldSenderBalance)
+    console.log('new sender balance + gas limit = ', sender.balance + rawTransaction.gasLimit)
+
+    console.log('Network Information')
+    console.log('Gas Price: ', await web3.eth.getGasPrice())
+    console.log('Uncle: ', await web3.eth.getUncle(10, 0))
+    console.log('Block Transaction Count: ', await web3.eth.getBlockTransactionCount(10))
   })
   .catch(console.log)
