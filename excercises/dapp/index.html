@@ -28,8 +28,8 @@
 
   <script>(async () => {
 
-      // Infura url: 'https://rinkeby.infura.io/v3/05b788c025324148a75ee3eada008e46'
-      const url = 'http://localhost:7545'
+      const ganache = true // else if false, infura
+      const url = ganache ? 'http://localhost:7545' : 'https://rinkeby.infura.io/v3/05b788c025324148a75ee3eada008e46'
       let accounts = null
       // Connect a the web3 provider
       if (ethereum) {
@@ -44,7 +44,6 @@
       let account = null
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        console.log(accounts)
         account = (accounts)[0]
       } catch { }
       console.log(account)
@@ -86,10 +85,8 @@
       ]
 
       // Get the contract address
-      const ganacheContractAddress = '0x326774DDb9323eefD6c6f55cEE7578F37Cd7a384'
-      const rinkebyContractAddress = '0x1b897F47d4184C1Fe5849cdD23EE19a9A68FCe3c'
-      const contract = new web3.eth.Contract(abi, rinkebyContractAddress)
-      contract.setProvider(url)
+      const contractAddress = ganache ? '0x326774DDb9323eefD6c6f55cEE7578F37Cd7a384' : '0x1b897F47d4184C1Fe5849cdD23EE19a9A68FCe3c'
+      const contract = new web3.eth.Contract(abi, contractAddress)
 
       $("#setMessageButton").click(async () => {
         const message = $("#userInput").val()
@@ -97,7 +94,6 @@
         await contract.methods.setMessage(message).send(
           { from: account },
           (error, result) => console.log(error || result))
-
       })
     })()</script>
 </body>
