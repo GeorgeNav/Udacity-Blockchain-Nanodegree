@@ -2,7 +2,6 @@ pragma solidity >=0.4.20;
 
 import "truffle/Assert.sol"; // Gives us various assertions to use in our tests. In testing, an assertion checks for things like equality, inequality or emptiness to return a pass/fail from our test
 import "truffle/DeployedAddresses.sol"; // address of fresh (newly) deployed contract
-import "../contracts/Adoption.sol";
 
 contract TestAdoption {
     // The address of the adoption contract to be tested
