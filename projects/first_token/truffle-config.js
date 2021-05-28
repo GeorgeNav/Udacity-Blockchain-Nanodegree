@@ -18,10 +18,9 @@
  *
  */
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const infuraKey = '295fcd1ba1514409bdab5144f5d3d8e9';
-const fs = require('fs');
-const mnemonic = fs.readFileSync('secret.key').toString().trim();
+const HDWalletProvider = require('@truffle/hdwallet-provider')
+const infuraKey = '295fcd1ba1514409bdab5144f5d3d8e9' // Infura project ID
+const mnemonic = require('fs').readFileSync('secret.key').toString().trim()
 const infuraURL = `https://rinkeby.infura.io/v3/${infuraKey}`
 
 module.exports = {
@@ -113,4 +112,4 @@ module.exports = {
   db: {
     enabled: false
   }
-};
+}
