@@ -18,6 +18,7 @@
 - Compile: `truffle compile`
 - Migrate (local node): `truffle migrate --reset`
 - Migrate (rinkeby network): `truffle migrate --reset --network rinkeby`
+- Create file called `secret.key` in the root of the project that holds the mneomic seed phrase
 
 # Starting from scratch instructions
 - create directory
